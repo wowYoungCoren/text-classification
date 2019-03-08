@@ -85,7 +85,7 @@ model.add(Dropout(0.2))
 model.add(Dense(labels.shape[1], activation='softmax'))
 model.summary()
 # plot_model(model, to_file='model.png',show_shapes=True)
-exit(0)
+# exit(0)
 model.compile(loss='categorical_crossentropy',
               optimizer='rmsprop',
               metrics=['acc'])
