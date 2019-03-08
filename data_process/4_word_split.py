@@ -1,8 +1,6 @@
 #coding:utf-8
-import sys
 import jieba.posseg as pseg
-reload(sys)
-sys.setdefaultencoding('utf8')
+
 
 train_contents = open('train_contents_unsplit.txt')
 test_contents = open('test_contents_unsplit.txt')
@@ -18,7 +16,7 @@ num = 0
 for line in train_lines:
     num += 1
     if num%100 == 0:
-        print num
+        print(num)
     words = pseg.cut(line)
     line0 = []
     for w in words:
@@ -29,7 +27,7 @@ for line in train_lines:
 for line in test_lines:
     num += 1
     if num%100 == 0:
-        print num
+        print(num)
     words = pseg.cut(line)
     line0 = []
     for w in words:
