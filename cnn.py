@@ -55,7 +55,7 @@ print("Step 4: training model...")
 from keras.layers import Dense, Input, Flatten, Dropout
 from keras.layers import Conv1D, MaxPooling1D, Embedding, GlobalMaxPooling1D
 from keras.models import Sequential
-from keras.utils import plot_model
+# from keras.utils import plot_model
 
 model = Sequential()
 model.add(Embedding(len(word_index) + 1, EMBEDDING_DIM, input_length=MAX_SEQUENCE_LENGTH))
@@ -66,7 +66,7 @@ model.add(Flatten())
 model.add(Dense(EMBEDDING_DIM, activation='relu'))
 model.add(Dense(labels.shape[1], activation='softmax'))
 model.summary()
-plot_model(model, to_file='model.png',show_shapes=True)
+# plot_model(model, to_file='model.png',show_shapes=True)
 
 model.compile(loss='categorical_crossentropy',
               optimizer='rmsprop',

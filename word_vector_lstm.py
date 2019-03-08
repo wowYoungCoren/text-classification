@@ -58,9 +58,9 @@ embedding_matrix = np.zeros((len(word_index) + 1, EMBEDDING_DIM))
 not_in_model = 0
 in_model = 0
 for word, i in word_index.items(): 
-    if unicode(word) in w2v_model:
+    if word in w2v_model:
         in_model += 1
-        embedding_matrix[i] = np.asarray(w2v_model[unicode(word)], dtype='float32')
+        embedding_matrix[i] = np.asarray(w2v_model[word], dtype='float32')
     else:
         not_in_model += 1
 print(str(not_in_model)+' words not in w2v model')

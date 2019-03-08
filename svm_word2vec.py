@@ -23,8 +23,8 @@ for train_doc in train_docs:
     vector = np.zeros(EMBEDDING_DIM)
     word_num = 0
     for word in words:
-        if unicode(word) in w2v_model:
-            vector += w2v_model[unicode(word)]
+        if word in w2v_model:
+            vector += w2v_model[word]
             word_num += 1
     if word_num > 0:
         vector = vector/word_num
@@ -34,8 +34,8 @@ for test_doc in test_docs:
     vector = np.zeros(EMBEDDING_DIM)
     word_num = 0
     for word in words:
-        if unicode(word) in w2v_model:
-            vector += w2v_model[unicode(word)]
+        if word in w2v_model:
+            vector += w2v_model[word]
             word_num += 1
     if word_num > 0:
         vector = vector/word_num
