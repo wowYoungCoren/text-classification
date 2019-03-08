@@ -1,6 +1,7 @@
 #coding:utf-8
 import keras
-
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "0, 1"
 
 VECTOR_DIR = 'vectors.bin'
 

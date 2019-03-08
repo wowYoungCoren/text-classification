@@ -24,7 +24,7 @@ def train_d2v_model():
 
 if __name__ == '__main__':
     print('(1) training doc2vec model...')
-    # train_d2v_model()
+    train_d2v_model()
     print('(2) load doc2vec model...')
     import gensim
     model = gensim.models.Doc2Vec.load('doc2vec.model')
@@ -32,11 +32,17 @@ if __name__ == '__main__':
     x_test = []
     y_train = train_labels
     y_test = test_labels
+    i = 0
     for idx, docvec in enumerate(model.docvecs):
         if idx < 17600:
             x_train.append(docvec)
         else:
             x_test.append(docvec)
+            try:
+                model.docvecs[idx + 1]
+            except KeyError:
+                break
+
     print('train doc shape: '+str(len(x_train))+' , '+str(len(x_train[0])))
     print('test doc shape: '+str(len(x_test))+' , '+str(len(x_test[0])))
 

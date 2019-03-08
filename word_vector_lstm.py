@@ -1,6 +1,7 @@
 #coding:utf-8
 import keras
-
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "0, 1"
 
 VECTOR_DIR = 'vectors.bin'
 
@@ -52,7 +53,7 @@ print('test docs: '+str(len(x_test)))
 
 print('(4) load word2vec as embedding...')
 import gensim
-from keras.utils import plot_model
+# from keras.utils import plot_model
 w2v_model = gensim.models.KeyedVectors.load_word2vec_format(VECTOR_DIR, binary=True)
 embedding_matrix = np.zeros((len(word_index) + 1, EMBEDDING_DIM))
 not_in_model = 0
@@ -83,7 +84,7 @@ model.add(LSTM(200, dropout=0.2, recurrent_dropout=0.2))
 model.add(Dropout(0.2))
 model.add(Dense(labels.shape[1], activation='softmax'))
 model.summary()
-plot_model(model, to_file='model.png',show_shapes=True)
+# plot_model(model, to_file='model.png',show_shapes=True)
 exit(0)
 model.compile(loss='categorical_crossentropy',
               optimizer='rmsprop',

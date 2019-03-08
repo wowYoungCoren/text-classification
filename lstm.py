@@ -1,4 +1,7 @@
 # coding:utf-8
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "0, 1"
+
 VECTOR_DIR = 'vectors.bin'
 
 MAX_SEQUENCE_LENGTH = 100

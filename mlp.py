@@ -1,4 +1,6 @@
 #coding:utf-8
+import os
+os.environ["CUDA_VISIBLE_DEVICES"] = "0, 1"
 
 VECTOR_DIR = 'vectors.bin'
 
@@ -51,14 +53,14 @@ print("Step 4: Training model -- mlp")
 from keras.layers import Dense, Input, Flatten, Dropout
 from keras.layers import LSTM, Embedding
 from keras.models import Sequential
-from keras.utils import plot_model
+# from keras.utils import plot_model
 
 model = Sequential()
 model.add(Dense(512, input_shape=(len(word_index)+1,), activation='relu'))
 model.add(Dropout(0.2))
 model.add(Dense(labels.shape[1], activation='softmax'))
 model.summary()
-plot_model(model, to_file='model.png',show_shapes=True)
+# plot_model(model, to_file='model.png',show_shapes=True)
 
 model.compile(loss='categorical_crossentropy',
               optimizer='rmsprop',
