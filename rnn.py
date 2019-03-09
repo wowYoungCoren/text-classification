@@ -69,6 +69,7 @@ model = Sequential()
 model.add(Embedding(len(word_index) + 1, EMBEDDING_DIM, input_length=MAX_SEQUENCE_LENGTH))
 model.add(CuDNNLSTM(EMBEDDING_DIM))
 # model.add(Dropout(0.2))
+model.add(Dense(EMBEDDING_DIM, activation='relu'))
 model.add(Dense(labels.shape[1], activation='softmax'))
 model.summary()
 # plot_model(model, to_file='model.png',show_shapes=True)
@@ -76,13 +77,13 @@ model.summary()
 # sgd = optimizers.SGD(lr=3, decay=1e-6, momentum=0.9, nesterov=True)
 # adagrad = keras.optimizers.Adagrad(lr=5, epsilon=None, decay=0.0)
 model.compile(loss='categorical_crossentropy',
-              optimizer="adamax",
+              optimizer="rmsprop",
               metrics=['acc'])
 
 # model.load_weights("cnn.h5")
 
 
-model.fit(x_train, y_train, validation_data=(x_val, y_val), epochs=8, batch_size=128)
+model.fit(x_train, y_train, validation_data=(x_val, y_val), epochs=3, batch_size=128)
 model.save('cnn.h5')
 
 print("Step 5: testing model...")

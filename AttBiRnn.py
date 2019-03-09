@@ -168,6 +168,7 @@ model.add(Embedding(len(word_index) + 1, EMBEDDING_DIM, input_length=MAX_SEQUENC
 model.add(Bidirectional(CuDNNLSTM(EMBEDDING_DIM, return_sequences=True)))
 model.add(Attention(MAX_SEQUENCE_LENGTH))
 # model.add(Dropout(0.2))
+model.add(Dense(EMBEDDING_DIM, activation='relu'))
 model.add(Dense(labels.shape[1], activation='softmax'))
 model.summary()
 # plot_model(model, to_file='model.png',show_shapes=True)
@@ -181,7 +182,7 @@ model.compile(loss='categorical_crossentropy',
 # model.load_weights("cnn.h5")
 
 
-model.fit(x_train, y_train, validation_data=(x_val, y_val), epochs=8, batch_size=128)
+model.fit(x_train, y_train, validation_data=(x_val, y_val), epochs=3, batch_size=128)
 model.save('cnn.h5')
 
 print("Step 5: testing model...")
