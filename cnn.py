@@ -6,7 +6,7 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0, 1"
 VECTOR_DIR = 'vectors.bin'
 
 MAX_SEQUENCE_LENGTH = 100
-EMBEDDING_DIM = 200
+EMBEDDING_DIM = 300
 VALIDATION_SPLIT = 0.16
 TEST_SPLIT = 0.2
 
@@ -30,12 +30,18 @@ tokenizer = Tokenizer()
 tokenizer.fit_on_texts(all_texts)
 sequences = tokenizer.texts_to_sequences(all_texts)
 word_index = tokenizer.word_index
+
 print('Found %s unique tokens.' % len(word_index))
 data = pad_sequences(sequences, maxlen=MAX_SEQUENCE_LENGTH)
 labels = to_categorical(np.asarray(all_labels))
 print('Shape of data tensor:', data.shape)
 print('Shape of label tensor:', labels.shape)
 
+# import random
+# a = random.Random()
+# a.seed(10)
+# a.shuffle(data)
+# a.shuffle(labels)
 
 print("Step 3")
 # split the data into training set, validation set, and test set
@@ -56,6 +62,7 @@ print("Step 4: training model...")
 from keras.layers import Dense, Input, Flatten, Dropout
 from keras.layers import Conv1D, MaxPooling1D, Embedding, GlobalMaxPooling1D
 from keras.models import Sequential
+from keras import optimizers
 # from keras.utils import plot_model
 
 model = Sequential()
@@ -69,14 +76,20 @@ model.add(Dense(labels.shape[1], activation='softmax'))
 model.summary()
 # plot_model(model, to_file='model.png',show_shapes=True)
 
+# sgd = optimizers.SGD(lr=3, decay=1e-6, momentum=0.9, nesterov=True)
+# adagrad = keras.optimizers.Adagrad(lr=5, epsilon=None, decay=0.0)
 model.compile(loss='categorical_crossentropy',
-              optimizer='rmsprop',
+              optimizer="adamax",
               metrics=['acc'])
-print(model.metrics_names)
+
+# model.load_weights("cnn.h5")
+
+
 model.fit(x_train, y_train, validation_data=(x_val, y_val), epochs=2, batch_size=128)
 model.save('cnn.h5')
 
 print("Step 5: testing model...")
+print(model.metrics_names)
 print(model.evaluate(x_test, y_test))
 
         

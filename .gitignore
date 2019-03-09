@@ -5,3 +5,4 @@ vectors.bin
 *.py_*
 all_contents.txt
 .idea*
+*.pyc

@@ -6,8 +6,8 @@ VECTOR_DIR = 'vectors.bin'
 
 MAX_SEQUENCE_LENGTH = 100
 EMBEDDING_DIM = 200
-VALIDATION_SPLIT = 0.16
-TEST_SPLIT = 0.2
+VALIDATION_SPLIT = 0.1
+TEST_SPLIT = 0.1
 
 
 print("Step 1")
@@ -57,16 +57,18 @@ from keras.models import Sequential
 
 model = Sequential()
 model.add(Dense(512, input_shape=(len(word_index)+1,), activation='relu'))
+model.add(Dense(512, input_shape=(len(word_index)+1,), activation='relu'))
+model.add(Dense(512, input_shape=(len(word_index)+1,), activation='relu'))
 model.add(Dropout(0.2))
 model.add(Dense(labels.shape[1], activation='softmax'))
 model.summary()
 # plot_model(model, to_file='model.png',show_shapes=True)
 
 model.compile(loss='categorical_crossentropy',
-              optimizer='rmsprop',
+              optimizer='adamax',
               metrics=['acc'])
 print(model.metrics_names)
-model.fit(x_train, y_train, validation_data=(x_val, y_val), epochs=2, batch_size=128)
+model.fit(x_train, y_train, validation_data=(x_val, y_val), epochs=1, batch_size=128)
 model.save('mlp.h5')
 
 print("Step 5: Test stage")
