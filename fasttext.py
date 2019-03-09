@@ -1,9 +1,17 @@
+"""
+    Note: Before training fasttext, you should go to https://github.com/facebookresearch/fastText
+install fastText as instruction in README.md.
+"""
 import fastText
 
 
 def data_preprocess(input_file_content, input_file_labels, output_file):
     """
+<<<<<<< HEAD
     Only used for generating train and data as fasttext_train.txt and fasttext_test.txt
+=======
+    Only used for convert train and test data to fasttext format.
+>>>>>>> putDayChan
     :return: no return
     """
     infile_content = open(input_file_content, "r")
