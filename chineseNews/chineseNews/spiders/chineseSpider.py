@@ -39,4 +39,13 @@ class chineseSpider(Spider):
         item['url'] = response.xpath('//*[@id="newsurl"]/@value').extract()
         item['title'] = response.xpath('//div[@class="con_left"]/div[@id="cont_1_1_2"]/h1/text()').extract()
         item['content'] = '\n'.join(response.xpath('//div[@class="left_zw"]/p/text()').extract())
+        item['url'] = item['url'][0].strip().replace('\n', '').replace('\r', '')
+        item['title'] = item['title'][0].strip().replace('\n', '').replace('\r', '')
+        # if len(item['content']) >= 2:
+        #     item['content'] = item['content'][0][0:100] + item['content'][1][0:100]
+        # else:
+        #     item['content'] = item['content'][0][0:100]
+        item['content'] = item['content'][0:100].strip().replace('\n', '').replace('\r', '')
+
+
         yield item
