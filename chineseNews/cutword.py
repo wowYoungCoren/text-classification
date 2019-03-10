@@ -17,9 +17,13 @@ def readfile(filepath):
 
 
 # 保存文件
-def savefile(savepath, content):
+def savefile(savepath, llcontent):
     fp = codecs.open(savepath, "w", encoding='utf-8')
-    fp.write(content)
+    for lcontent in llcontent:
+        for content in lcontent:
+            fp.write(content)
+            fp.write(' ')
+        fp.write('\n')
     fp.close()
 
 
@@ -48,7 +52,7 @@ for url_line in readwordslist(inputwords_file):
 
 # "+="是两个list融合，result是list中保存list
 
-# savefile('final.txt', result)
+savefile('final.txt', result)
 cutwords = dict(Counter(cutwordslist))
 
 outputwords = {}
