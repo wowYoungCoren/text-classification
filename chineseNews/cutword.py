@@ -7,6 +7,8 @@ import numpy as np
 inputwords_file = "IT4.csv"
 stopwords_file = "stopwords.dat"
 
+f2 = open('mil_labels.txt', 'a')
+
 
 # 读取文件
 def readfile(filepath):
@@ -39,6 +41,7 @@ def filter_url_tag(urlstring):
     results = re.compile(r'http://[a-zA-Z0-9.?/&=:]*', re.S)
     return results.sub("", urlstring).replace('\n', '').replace(' ', '').replace(u'\u2605', '').replace('10', '')
 
+
 result = []
 cutwordslist = []
 stopwords = readwordslist(stopwords_file)
@@ -49,6 +52,10 @@ for url_line in readwordslist(inputwords_file):
     temp += [word for word in jieba.cut(line, cut_all=False) if word not in stopwords]
     cutwordslist += temp
     result.append(temp)
+    # 为每条新闻添加标签
+    f2.write('9' + '\n')
+
+f2.close()
 
 # "+="是两个list融合，result是list中保存list
 
@@ -69,6 +76,7 @@ outputwords_sorted = sorted(outputwords.items(), key= lambda x : x[1], reverse=T
 print(repr(outputwords_sorted))
 print("")
 print(np.shape(outputwords_sorted))
+
 
 # file = open('IT4.csv', encoding='utf-8').read().split('\n')  # 一行行的读取内容
 # Rs2 = []  # 建立存储分词的列表
