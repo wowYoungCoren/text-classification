@@ -73,11 +73,13 @@ class dataProcess():
         f1.close()
         f2.close()
 
-entD = dataProcess('datasource/entnews.txt')
+'''entD = dataProcess('datasource/entnews.txt')
 entD.process()
 moneyD = dataProcess('datasource/moneynews.txt')
 moneyD.process()
 travleD = dataProcess('datasource/travlenews.txt')
 travleD.process()
 sportD = dataProcess('datasource/sportsnews.txt')
-sportD.process()
+sportD.process()'''
+eduD = dataProcess('datasource/edunews.txt')
+eduD.process()
