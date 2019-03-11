@@ -67,7 +67,9 @@ class dataProcess():
         f1 = open('testdata/testdata.txt','a')
         f2 = open('testdata/testlabel.txt','a')
         f1.write('\n'.join(train))
+        f1.write('\n')
         f2.write('\n'.join(labels))
+        f2.write('\n')
         f1.close()
         f2.close()
 
