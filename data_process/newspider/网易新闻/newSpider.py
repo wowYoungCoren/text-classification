@@ -1,5 +1,3 @@
-# 爬取网易新闻 
-# 新浪新闻与网易新闻 页面构成类似 ,请求一样是js 请求
 import requests
 import json
 
@@ -31,8 +29,8 @@ class newSpider():
 
 class sportSpyider(newSpider):
     
-    def __init__(self):
-        self.headers = {
+    def __init__(self,baseUrl,headers,label):
+        ''' self.headers = {
             'Host':'sports.163.com',
             'Referer':'http://sports.163.com/allsports/',
             'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36',
@@ -42,9 +40,16 @@ class sportSpyider(newSpider):
             'Accept-Language':'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7',
             'Accept':'*/*',
             
-        }
+        }'''
+        self.headers = headers
+        self.label = label
+        '''self.proxies = {
+            'http':'http://123.163.118.236:9999',
+        }'''
+
         
-        self.baseUrl = 'http://sports.163.com/special/000587PQ/newsdata_allsports_index{}.js?callback=data_callback'
+        #self.baseUrl = 'http://sports.163.com/special/000587PQ/newsdata_allsports_index{}.js?callback=data_callback'
+        self.baseUrl = baseUrl
         self.session = requests.Session()
     
     def getPage(self,pageNum):
@@ -65,19 +70,24 @@ class sportSpyider(newSpider):
                 text = response.text[14:-1]
                 result = json.loads(text)
                 return result
+            else: 
+                print('get 失败')
         except requests.ConnectionError as e:
             print('爬取失败')
 
     def parsePage(self,json):
-        print('解析页面')
+        
         if json:
+            print('解析页面')
             for item in json:
                 docUrl = item.get('docurl')
                 content = self.getDoc(docUrl)
                 yield {
                     'content':content,
-                    'lable': 5,
+                    'lable': self.label,
                 }
+        else:
+            print('未爬取到页面')
     def getDoc(self,docUrl):
         print('获取文章'+docUrl)
         try:
@@ -99,19 +109,19 @@ class sportSpyider(newSpider):
         except requests.ConnectionError as e:
             print('获取新闻文章失败')
 
-    def writeItem(self,item):
-        with open ('sportsnews.txt','a',encoding='utf-8') as f:
+    def writeItem(self,item,name):
+        with open ('datasource/{}.txt'.format(name),'a',encoding='utf-8') as f:
             f.write(json.dumps(item, ensure_ascii=False)+'\n')
     
-    def startSpyider(self):
-        for i in range(1,10):
+    def startSpyider(self,name):
+        for i in range(1,11):
             result = self.getPage(i)
             for item in self.parsePage(result):
-                self.writeItem(item)
+                self.writeItem(item,name)
             
 
-sp = sportSpyider()
-sp.startSpyider()
+
+
 '''def test():
     print('开始测试')
     headers = {
