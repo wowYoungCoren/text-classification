@@ -28,12 +28,12 @@ def data_preprocess(input_file_content, input_file_labels, output_file):
 
 if __name__ == "__main__":
     # data_preprocess("train_contents.txt", "train_labels.txt", "fasttext_train.txt")
-    # data_preprocess("test_contents.txt", "test_labels.txt", "fasttext_test.txt")
+    data_preprocess("./data_process/newspider/网易新闻/sports_tests.txt", "./data_process/newspider/网易新闻/sports_labels.txt", "fasttext_test_zhihao.txt")
 
     model_save = "fasttext_model"
     train_file = "fasttext_train.txt"
-    test_file = "fasttext_test.txt"
-    classifier = fastText.train_supervised(input=train_file, dim=100, epoch=20, lr=0.1, wordNgrams=1, bucket=2000000)
+    test_file = "fasttext_test_zhihao.txt"
+    classifier = fastText.train_supervised(input=train_file, dim=100, epoch=30, lr=0.1, wordNgrams=1, bucket=2000000)
 
     result = classifier.test(test_file)
     print(result)

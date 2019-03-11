@@ -14,8 +14,8 @@ TEST_SPLIT = 0.2
 print("Step 1")
 train_texts = open('train_contents.txt').read().split('\n')
 train_labels = open('train_labels.txt').read().split('\n')
-test_texts = open('test_contents.txt').read().split('\n')
-test_labels = open('test_labels.txt').read().split('\n')
+test_texts = open('./data_process/newspider/网易新闻/sports_tests.txt').read().split('\n')
+test_labels = open('./data_process/newspider/网易新闻/sports_labels.txt').read().split('\n')
 all_texts = train_texts + test_texts
 all_labels = train_labels + test_labels
 
@@ -62,7 +62,7 @@ print("Step 4: training model...")
 from keras.layers import Dense, Input, Flatten, Dropout
 from keras.layers import Conv1D, MaxPooling1D, Embedding, GlobalMaxPooling1D, CuDNNLSTM
 from keras.models import Sequential
-from keras import optimizers
+from keras import optimizers, metrics
 # from keras.utils import plot_model
 
 model = Sequential()
@@ -78,7 +78,7 @@ model.summary()
 # adagrad = keras.optimizers.Adagrad(lr=5, epsilon=None, decay=0.0)
 model.compile(loss='categorical_crossentropy',
               optimizer="rmsprop",
-              metrics=['acc'])
+              metrics=['acc', 'recall', 'precision', 'f1score'])
 
 # model.load_weights("cnn.h5")
 
@@ -88,4 +88,5 @@ model.save('cnn.h5')
 
 print("Step 5: testing model...")
 print(model.metrics_names)
+# model.metrics
 print(model.evaluate(x_test, y_test))

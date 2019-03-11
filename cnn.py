@@ -1,6 +1,7 @@
 #coding:utf-8
 import keras
 import os
+import tensorflow as tf
 os.environ["CUDA_VISIBLE_DEVICES"] = "0, 1"
 
 VECTOR_DIR = 'vectors.bin'
@@ -75,12 +76,15 @@ model.add(Dense(EMBEDDING_DIM, activation='relu'))
 model.add(Dense(labels.shape[1], activation='softmax'))
 model.summary()
 # plot_model(model, to_file='model.png',show_shapes=True)
+# from sklearn import metrics
+
+
 
 # sgd = optimizers.SGD(lr=3, decay=1e-6, momentum=0.9, nesterov=True)
 # adagrad = keras.optimizers.Adagrad(lr=5, epsilon=None, decay=0.0)
 model.compile(loss='categorical_crossentropy',
               optimizer="adamax",
-              metrics=['acc'])
+              metrics=['acc', "recall", "precision", "f1score"])
 
 # model.load_weights("cnn.h5")
 
