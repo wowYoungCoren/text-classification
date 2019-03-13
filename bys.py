@@ -9,8 +9,8 @@ TEST_SPLIT = 0.2
 print('(1) load texts...')
 train_texts = open('train_contents.txt').read().split('\n')
 train_labels = open('train_labels.txt').read().split('\n')
-test_texts = open('./data_process/newspider/网易新闻/sports_tests.txt').read().split('\n')
-test_labels = open('./data_process/newspider/网易新闻/sports_labels.txt').read().split('\n')
+test_texts = open('./data_process/newspider/网易新闻/testdata/testdata.txt').read().split('\n')
+test_labels = open('./data_process/newspider/网易新闻/testdata/testlabel.txt').read().split('\n')
 all_text = train_texts + test_texts
 
 print('(2) doc to var...')
