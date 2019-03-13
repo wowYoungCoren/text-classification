@@ -29,7 +29,7 @@ class newsSpider():
         chrome_options=Options()
         #设置chrome浏览器无界面模式
         chrome_options.add_argument('--headless')
-
+        chrome_options.add_argument('--no-sandbox')
         self.browser = webdriver.Chrome(chrome_options=chrome_options)
         self.wait = WebDriverWait(self.browser,5)
         

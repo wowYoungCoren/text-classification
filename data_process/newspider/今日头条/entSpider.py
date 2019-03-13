@@ -22,5 +22,5 @@ params = {
 
 baseurl = 'https://www.toutiao.com/api/pc/feed/?'
 
-entSpider = newsSpider(baseUrl,headers,params,10)
+entSpider = newsSpider(baseurl,headers,params,10)
 entSpider.startSpider('entnews')
