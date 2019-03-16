@@ -3,6 +3,7 @@ import os
 os.environ["CUDA_VISIBLE_DEVICES"] = "0, 1"
 
 import keras
+import pdb
 
 VECTOR_DIR = 'vectors.bin'
 
@@ -57,7 +58,10 @@ print('(4) load word2vec as embedding...')
 import gensim
 from keras.utils import plot_model
 w2v_model = gensim.models.KeyedVectors.load_word2vec_format(VECTOR_DIR, binary=True)
+# 读取word2vec模型
 embedding_matrix = np.zeros((len(word_index) + 1, EMBEDDING_DIM))
+# shpae = (65605, 200)
+
 not_in_model = 0
 in_model = 0
 for word, i in word_index.items(): 
@@ -66,14 +70,18 @@ for word, i in word_index.items():
         embedding_matrix[i] = np.asarray(w2v_model[word], dtype='float32')
     else:
         not_in_model += 1
+# 在word_index字典中取word，到w2v_model中查多少词没有, 将有的词加入embedding_matrix，对于没有的词，weight = 0　(np.zeros　in line 70)
+
 print(str(not_in_model)+' words not in w2v model')
+#　结果：　13822 words not in w2v model
+
 from keras.layers import Embedding
 embedding_layer = Embedding(len(word_index) + 1,
                             EMBEDDING_DIM,
                             weights=[embedding_matrix],
                             input_length=MAX_SEQUENCE_LENGTH,
                             trainable=False)
-
+# 将embedding层的参数设置为所得的embedding_matrix，并锁层不进行训练 (trainable=False)
 
 print('(5) training model...')
 from keras.layers import Dense, Input, Flatten, Dropout

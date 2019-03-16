@@ -7,11 +7,7 @@ import fastText
 
 def data_preprocess(input_file_content, input_file_labels, output_file):
     """
-<<<<<<< HEAD
     Only used for generating train and data as fasttext_train.txt and fasttext_test.txt
-=======
-    Only used for convert train and test data to fasttext format.
->>>>>>> putDayChan
     :return: no return
     """
     infile_content = open(input_file_content, "r")
@@ -28,12 +24,14 @@ def data_preprocess(input_file_content, input_file_labels, output_file):
 
 if __name__ == "__main__":
     # data_preprocess("train_contents.txt", "train_labels.txt", "fasttext_train.txt")
-    data_preprocess("./data_process/newspider/网易新闻/sports_tests.txt", "./data_process/newspider/网易新闻/sports_labels.txt", "fasttext_test_zhihao.txt")
+    data_preprocess("./data_process/newspider/网易新闻/testdata/testdata.txt", "./data_process/newspider/网易新闻/testdata/testlabel.txt", "fasttext_test_zhihao.txt")
+    # 转化之前的标签的格式为fasttext的格式
 
     model_save = "fasttext_model"
     train_file = "fasttext_train.txt"
     test_file = "fasttext_test_zhihao.txt"
-    classifier = fastText.train_supervised(input=train_file, dim=100, epoch=30, lr=0.1, wordNgrams=1, bucket=2000000)
+    classifier = fastText.train_supervised(input=train_file, dim=100, epoch=30, lr=0.1, wordNgrams=2, bucket=2000000)
+    # fasttext训练
 
     result = classifier.test(test_file)
     print(result)
