@@ -49,17 +49,14 @@ class dataProcess():
             try:
                 text = json.loads(doc)['content']
                 label = json.loads(doc)['label']
-                print(type(text))
                 print(text)
                 if text == "" or text == None:
                     continue
                 if len(text) > 100: 
                     text = text[:100]
                 words = pseg.cut(text)
-                print(type(words))
                 line0 = [] 
                 for w in words:
-                    print(type(w))
                     if 'x' != w.flag:
                         line0.append(w.word)
                 train.append(' '.join(line0))
