@@ -19,8 +19,8 @@ for root, dirs, files in os.walk('.', topdown=True):
 			write_content += line	
 		f.write(write_content + '\n')
 		fr.close()
-		# if i == 100:
-		# 	break
+		if i == 20000:
+			break
 	f.close()
 	print(root[2:]+" DONE")
 	print(root[2:]+" USE TIME: ", time.time()-start_inside)
