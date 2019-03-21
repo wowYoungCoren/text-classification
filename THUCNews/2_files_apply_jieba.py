@@ -17,6 +17,7 @@ def jieba(name):
         num += 1
         if num%10000 == 0:
             print(num)
+            print(name)
         words = pseg.cut(line)
         line0 = []
         for w in words:
