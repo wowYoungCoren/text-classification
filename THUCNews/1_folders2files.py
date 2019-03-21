@@ -1,10 +1,8 @@
 import os
 
-no_list = ['./彩票', './时尚', './星座']
+namelist = ['时政', '体育', '家居', '股票', '房产', '游戏', '财经', '娱乐', '社会', '科技', '教育']
 for root, dirs, files in os.walk('.', topdown=True):
-	if len(files) == 0:
-		continue
-	if root in no_list:
+	if root[2:] not in namelist:
 		continue
 	f = open(root+'.txt', 'w')
 	for i, file in enumerate(files):
