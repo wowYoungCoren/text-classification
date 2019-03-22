@@ -149,6 +149,7 @@ class newsSpider():
                     self.params['max_behot_time'] = result.get('next').get('max_behot_time')
                     self.params['max_behot_time_tmp'] = result.get('next').get('max_behot_time')
                     print(self.params['max_behot_time'])
+                    time.sleep(1)
             except AttributeError as e:
                 print('结束')
                 break

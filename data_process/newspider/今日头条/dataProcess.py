@@ -75,7 +75,7 @@ class dataProcess():
         f2.close()
 
 
-'''carD = dataProcess('datasource/carnews{}.txt'.format(str(datetime.date.today())))
+carD = dataProcess('datasource/carnews{}.txt'.format(str(datetime.date.today())))
 carD.process()
 
 entD = dataProcess('datasource/entnews{}.txt'.format(str(datetime.date.today())))
@@ -84,7 +84,7 @@ entD.process()
 moneyD = dataProcess('datasource/moneynews{}.txt'.format(str(datetime.date.today())))
 moneyD.process()
 
-fashionD = dataProcess('datasource/fashionnews{}.txt'.format(str(datetime.date.today())))
+'''fashionD = dataProcess('datasource/fashionnews{}.txt'.format(str(datetime.date.today())))
 fashionD.process()'''
 
 healthD = dataProcess('datasource/healthnews{}.txt'.format(str(datetime.date.today())))
