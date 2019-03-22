@@ -1,6 +1,7 @@
 import json 
 import jieba.posseg as pseg
 from json.decoder import JSONDecodeError
+import datetime
 
 '''docs = open('sportsnews.txt')
 f2 = labels = open('sports_labels.txt','a')
@@ -74,30 +75,30 @@ class dataProcess():
         f2.close()
 
 
-'''carD = dataProcess('datasource/carnews.txt')
+'''carD = dataProcess('datasource/carnews{}.txt'.format(str(datetime.date.today())))
 carD.process()
 
-entD = dataProcess('datasource/entnews.txt')
+entD = dataProcess('datasource/entnews{}.txt'.format(str(datetime.date.today())))
 entD.process()
 
-moneyD = dataProcess('datasource/moneynews.txt')
+moneyD = dataProcess('datasource/moneynews{}.txt'.format(str(datetime.date.today())))
 moneyD.process()
 
-fashionD = dataProcess('datasource/fashionnews.txt')
-fashionD.process()
+fashionD = dataProcess('datasource/fashionnews{}.txt'.format(str(datetime.date.today())))
+fashionD.process()'''
 
-healthD = dataProcess('datasource/healthnews.txt')
+healthD = dataProcess('datasource/healthnews{}.txt'.format(str(datetime.date.today())))
 healthD.process()
 
-itD = dataProcess('datasource/itnews.txt')
+itD = dataProcess('datasource/itnews{}.txt'.format(str(datetime.date.today())))
 itD.process()
 
-warD = dataProcess('datasource/warnews.txt')
+warD = dataProcess('datasource/warnews{}.txt'.format(str(datetime.date.today())))
 warD.process()
 
-sportD = dataProcess('datasource/sportnews.txt')
-sportD.process()'''
+sportD = dataProcess('datasource/sportnews{}.txt'.format(str(datetime.date.today())))
+sportD.process()
 
-travleD = dataProcess('datasource/travelnews.txt')
+travleD = dataProcess('datasource/travelnews{}.txt'.format(str(datetime.date.today())))
 travleD.process()
 
