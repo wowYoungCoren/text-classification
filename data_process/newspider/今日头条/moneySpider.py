@@ -15,9 +15,9 @@ params = {
         'max_behot_time':0,
         'max_behot_time_tmp':0,
         'tadrequire':'true',
-        'as':'A1852CA96730A74',
-        'cp':'5C97705A67747E1',
-        '_signature':'Kwf2.QAAd5cpquE7PRs9-SsH9u'
+        'as':'A1958CB9090AAAD',
+        'cp':'5C99DA7AEADD5E1',
+        '_signature':'S2SmPwAAF.5JybH5VtUH4Utkpi'
     }
 
 baseurl = 'https://www.toutiao.com/api/pc/feed/?'
